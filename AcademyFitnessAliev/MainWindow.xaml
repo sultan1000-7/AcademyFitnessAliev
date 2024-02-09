@@ -1,0 +1,43 @@
+﻿<Window x:Class="AcademyFitnessAliev.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AcademyFitnessAliev"
+        mc:Ignorable="d"
+        Title="Список регистраций на курс" Height="450" Width="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Name="AddButton" Click="AddButton_Click">Добавить</Button>
+            <Button Name="DeleteButton" Click="DeleteButton_Click">Удалить</Button>
+            <Button x:Name="FiltrButton" Click="FiltrButton_Click">Показать завершенные</Button>
+            <ComboBox Name="CmbSelectTrainer" SelectedItem="{Binding Trainer.ФИО}" SelectionChanged="CmdSelectTrainer_SelectionChanged" SelectedIndex="0" DisplayMemberPath="ФИО"></ComboBox>
+            <Button Name="CancelButton" Click="CancelButton_Click">Отменить фильтр</Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" Name="RegistrationGrid" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Курс" Binding="{Binding Course.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Тренер" Binding="{Binding Trainer.ФИО}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding CreateDate, StringFormat={}{0:dd MMMM yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Балл" Binding="{Binding TotalPoint}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Завершен" Binding="{Binding IsDone}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Комментарии" Binding="{Binding Comment}"></DataGridTextColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="EditButton" Click="EditButton_Click">Редактировать</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
